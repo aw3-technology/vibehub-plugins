@@ -27,8 +27,22 @@ function config() {
   return vscode.workspace.getConfiguration("vibehub");
 }
 
+// The bare domain 308-redirects to www, and fetch drops the Authorization
+// header on that cross-origin hop, so configs saved with "https://vibehub.co"
+// would 401 on every call. Map it (and a trailing-dot form) to www.
+function canonicalApiUrl(url) {
+  const trimmed = String(url).replace(/\/+$/, "");
+  try {
+    const host = new URL(trimmed).hostname.replace(/\.$/, "");
+    if (host === "vibehub.co" || host === "www.vibehub.co") return "https://www.vibehub.co";
+  } catch {
+    // not a URL; leave it for the caller's own error handling
+  }
+  return trimmed;
+}
+
 function apiUrl() {
-  return (config().get("apiUrl") || "https://www.vibehub.co").replace(/\/$/, "");
+  return canonicalApiUrl(config().get("apiUrl") || "https://www.vibehub.co");
 }
 
 async function getToken({ promptIfMissing = false } = {}) {

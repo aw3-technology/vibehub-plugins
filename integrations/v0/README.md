@@ -1,24 +1,18 @@
-# vibehub for v0
+# vibehub for v0 (planned)
 
-v0.dev runs server-side and doesn't ship a local SDK — so we capture from
-the page itself with a bookmarklet.
+Capturing v0 chats into VibeHub is planned, not available yet.
 
-## Install the bookmarklet
+The first version was a bookmarklet that scraped the chat and POSTed it to
+the VibeHub API. It couldn't work: v0.dev blocks requests to other sites
+(v0 and Lovable restrict `connect-src` in their Content-Security-Policy, and
+Lovable only runs scripts that carry its nonce), and Lovable and Bolt set
+`Cross-Origin-Opener-Policy: same-origin`, which rules out a popup handoff.
+It also asked you to paste your VibeHub token into the v0 page, where any
+script on that page could read it.
 
-Drag this link into your bookmarks bar:
+The planned design is a self-contained bookmarklet that submits the scraped
+chat to a new VibeHub tab, where you review it and import it with your
+VibeHub login. Your token never touches the v0 page.
 
-```
-javascript:(async()=>{await import('https://www.vibehub.co/integrations/v0/bookmarklet.js')})();
-```
-
-On a v0 chat page, click it. First run will prompt you for a VibeHub token
-(stored in `localStorage` per-origin). Subsequent clicks just import.
-
-## What gets captured
-
-- Every visible user/assistant turn on the page
-- The page title as the run summary
-- The v0 chat id (URL path tail) as the idempotency key — re-running on
-  the same chat updates the same VibeHub run rather than duplicating
-
-> Source: the served bookmarklet lives at `public/integrations/v0/bookmarklet.js` (deployed to the URL above).
+Until then, use the [Claude Code plugin](../claude-code) or the `vb` CLI for
+work you do outside v0.

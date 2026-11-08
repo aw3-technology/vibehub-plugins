@@ -55,8 +55,22 @@ function log(msg) {
   process.stderr.write(`[vibehub] ${msg}\n`);
 }
 
+// The bare domain 308-redirects to www, and fetch drops the Authorization
+// header on that cross-origin hop, so configs saved with "https://vibehub.co"
+// would 401 on every call. Map it (and a trailing-dot form) to www.
+function canonicalApiUrl(url) {
+  const trimmed = String(url).replace(/\/+$/, "");
+  try {
+    const host = new URL(trimmed).hostname.replace(/\.$/, "");
+    if (host === "vibehub.co" || host === "www.vibehub.co") return "https://www.vibehub.co";
+  } catch {
+    // not a URL; leave it for the caller's own error handling
+  }
+  return trimmed;
+}
+
 function envConfig() {
-  const apiUrl = process.env.VIBEHUB_API_URL || "https://www.vibehub.co";
+  const apiUrl = canonicalApiUrl(process.env.VIBEHUB_API_URL || "https://www.vibehub.co");
   const token = process.env.VIBEHUB_TOKEN;
   return { apiUrl, token };
 }

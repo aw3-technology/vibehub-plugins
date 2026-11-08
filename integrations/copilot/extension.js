@@ -12,6 +12,20 @@
 const vscode = require("vscode");
 const https = require("https");
 
+// The bare domain 308-redirects to www, and fetch drops the Authorization
+// header on that cross-origin hop, so configs saved with "https://vibehub.co"
+// would 401 on every call. Map it (and a trailing-dot form) to www.
+function canonicalApiUrl(url) {
+  const trimmed = String(url).replace(/\/+$/, "");
+  try {
+    const host = new URL(trimmed).hostname.replace(/\.$/, "");
+    if (host === "vibehub.co" || host === "www.vibehub.co") return "https://www.vibehub.co";
+  } catch {
+    // not a URL; leave it for the caller's own error handling
+  }
+  return trimmed;
+}
+
 function postJSON(apiUrl, path, token, body) {
   return new Promise((resolve, reject) => {
     const url = new URL(apiUrl.replace(/\/$/, "") + path);
@@ -49,7 +63,7 @@ function postJSON(apiUrl, path, token, body) {
 
 async function captureCurrentChat() {
   const config = vscode.workspace.getConfiguration("vibehub");
-  const apiUrl = config.get("apiUrl") || "https://www.vibehub.co";
+  const apiUrl = canonicalApiUrl(config.get("apiUrl") || "https://www.vibehub.co");
   let token = config.get("token") || process.env.VIBEHUB_TOKEN;
   if (!token) {
     token = await vscode.window.showInputBox({

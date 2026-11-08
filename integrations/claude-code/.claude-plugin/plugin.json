@@ -1,7 +1,7 @@
 {
   "name": "vibehub",
   "description": "Automatically capture Claude Code conversation transcripts and agent output into VibeHub, and attach them to git commits.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": { "name": "VibeHub", "url": "https://www.vibehub.co" },
   "homepage": "https://github.com/aw3-technology/vibehub-plugins/tree/main/integrations/claude-code",
   "repository": "https://github.com/aw3-technology/vibehub-plugins",
