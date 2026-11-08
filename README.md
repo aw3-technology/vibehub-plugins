@@ -36,7 +36,7 @@ Details: [integrations/claude-code](integrations/claude-code).
 | JetBrains IDEs | MCP server | [integrations/jetbrains](integrations/jetbrains) |
 | Visual Studio | MCP server | [integrations/visual-studio](integrations/visual-studio) |
 | Replit | Setup script | [integrations/replit](integrations/replit) |
-| v0, Lovable, Bolt | Browser bookmarklet | [v0](integrations/v0) · [Lovable](integrations/lovable) · [Bolt](integrations/bolt) |
+| v0, Lovable, Bolt | Planned | [v0](integrations/v0) · [Lovable](integrations/lovable) · [Bolt](integrations/bolt) |
 
 The MCP-based setups run the `vibehub-mcp` server, which isn't on npm yet.
 Until it is, Claude Code is the supported path.
