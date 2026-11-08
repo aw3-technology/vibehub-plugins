@@ -1,0 +1,52 @@
+{
+  "name": "vibehub-vscode",
+  "displayName": "VibeHub",
+  "description": "Capture commits, diffs, and AI chat transcripts into VibeHub from VS Code, Cursor, and Windsurf.",
+  "version": "0.2.0",
+  "publisher": "vibehub",
+  "engines": { "vscode": "^1.84.0" },
+  "main": "./extension.js",
+  "categories": ["AI", "SCM Providers", "Other"],
+  "activationEvents": ["workspaceContains:.git", "onStartupFinished"],
+  "contributes": {
+    "commands": [
+      { "command": "vibehub.setToken", "title": "VibeHub: Set API Token" },
+      { "command": "vibehub.testConnection", "title": "VibeHub: Test Connection" },
+      { "command": "vibehub.captureLastCommit", "title": "VibeHub: Capture Last Commit" },
+      { "command": "vibehub.captureChat", "title": "VibeHub: Capture Chat Transcript" },
+      { "command": "vibehub.openDashboard", "title": "VibeHub: Open Dashboard" }
+    ],
+    "configuration": {
+      "title": "VibeHub",
+      "properties": {
+        "vibehub.apiUrl": {
+          "type": "string",
+          "default": "https://www.vibehub.co",
+          "description": "VibeHub API base URL."
+        },
+        "vibehub.autoCaptureCommits": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically push new commits (message, diff, stats) to VibeHub as you commit."
+        },
+        "vibehub.projectName": {
+          "type": "string",
+          "default": "",
+          "description": "VibeHub project name to capture into. Defaults to the workspace folder name."
+        },
+        "vibehub.token": {
+          "type": "string",
+          "default": "",
+          "description": "Deprecated — use the 'VibeHub: Set API Token' command (stored in secret storage). Kept as a fallback.",
+          "deprecationMessage": "Use the 'VibeHub: Set API Token' command instead; tokens in settings sync in plaintext."
+        }
+      }
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aw3-technology/vibehub-plugins",
+    "directory": "integrations/vscode"
+  }
+}

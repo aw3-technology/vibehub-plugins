@@ -1,0 +1,12 @@
+{
+  "name": "vibehub-windsurf",
+  "version": "0.1.0",
+  "description": "Wire the VibeHub MCP server into Windsurf (Cascade).",
+  "type": "module",
+  "bin": {
+    "vibehub-windsurf": "install.mjs"
+  },
+  "files": ["install.mjs", "mcp.template.json", "README.md"],
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

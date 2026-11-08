@@ -1,0 +1,13 @@
+{
+  "context_servers": {
+    "vibehub": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["-y", "vibehub-mcp"],
+      "env": {
+        "VIBEHUB_API_URL": "https://www.vibehub.co",
+        "VIBEHUB_TOKEN": "vbh_REPLACE_ME"
+      }
+    }
+  }
+}

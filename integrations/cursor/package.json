@@ -1,0 +1,12 @@
+{
+  "name": "vibehub-cursor",
+  "version": "0.1.0",
+  "description": "Wire the VibeHub MCP server into Cursor.",
+  "type": "module",
+  "bin": {
+    "vibehub-cursor": "install.mjs"
+  },
+  "files": ["install.mjs", "mcp.template.json", "README.md"],
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

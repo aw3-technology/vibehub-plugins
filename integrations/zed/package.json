@@ -1,0 +1,12 @@
+{
+  "name": "vibehub-zed",
+  "version": "0.1.0",
+  "description": "Wire the VibeHub MCP server into Zed.",
+  "type": "module",
+  "bin": {
+    "vibehub-zed": "install.mjs"
+  },
+  "files": ["install.mjs", "settings.template.json", "README.md"],
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

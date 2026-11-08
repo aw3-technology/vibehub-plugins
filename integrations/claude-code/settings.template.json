@@ -1,0 +1,26 @@
+{
+  "env": {
+    "VIBEHUB_API_URL": "https://www.vibehub.co",
+    "VIBEHUB_TOKEN": "vbh_REPLACE_ME"
+  },
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ],
+    "PostToolUse": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ],
+    "Stop": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ],
+    "SubagentStop": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ],
+    "SessionEnd": [
+      { "hooks": [{ "type": "command", "command": "node /ABSOLUTE/PATH/TO/integrations/claude-code/hook.mjs" }] }
+    ]
+  }
+}

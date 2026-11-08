@@ -1,0 +1,35 @@
+{
+  "name": "vibehub-vscode",
+  "displayName": "VibeHub for VS Code",
+  "description": "Capture GitHub Copilot Chat into VibeHub.",
+  "version": "0.1.0",
+  "publisher": "vibehub",
+  "engines": { "vscode": "^1.84.0" },
+  "main": "./extension.js",
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onCommand:vibehub.capture"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vibehub.capture",
+        "title": "VibeHub: Capture current Copilot Chat"
+      }
+    ],
+    "configuration": {
+      "title": "VibeHub",
+      "properties": {
+        "vibehub.apiUrl": {
+          "type": "string",
+          "default": "https://www.vibehub.co",
+          "description": "VibeHub API base URL."
+        },
+        "vibehub.token": {
+          "type": "string",
+          "default": "",
+          "description": "VibeHub API token (Settings → API tokens)."
+        }
+      }
+    }
+  },
+  "license": "MIT"
+}

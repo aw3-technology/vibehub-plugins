@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+// vibehub-claude-code install
+//
+// Merges VibeHub hook entries into the user's ~/.claude/settings.json without
+// clobbering existing hooks. Safe to re-run.
+
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join, dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const HOOK_PATH = resolve(HERE, "hook.mjs");
+
+const SETTINGS_PATH = join(homedir(), ".claude", "settings.json");
+const BACKUP_PATH = SETTINGS_PATH + ".vibehub.bak";
+
+// Quote the path: install dirs can contain spaces (e.g. ~/My Projects/…),
+// which would otherwise split into separate shell args and break the hook.
+const HOOK_COMMAND = `node "${HOOK_PATH}"`;
+const EVENTS = ["SessionStart", "UserPromptSubmit", "Stop", "SubagentStop", "PostToolUse", "SessionEnd"];
+
+function loadSettings() {
+  if (!existsSync(SETTINGS_PATH)) return {};
+  try {
+    return JSON.parse(readFileSync(SETTINGS_PATH, "utf8"));
+  } catch (e) {
+    console.error(`Could not parse ${SETTINGS_PATH}: ${e.message}`);
+    console.error("Fix it manually or delete it, then re-run.");
+    process.exit(1);
+  }
+}
+
+function backup() {
+  if (!existsSync(SETTINGS_PATH)) return;
+  copyFileSync(SETTINGS_PATH, BACKUP_PATH);
+}
+
+function ensureHookEntry(hooks, event) {
+  if (!Array.isArray(hooks[event])) hooks[event] = [];
+  // Each entry is {matcher?, hooks: [{type, command}]}. We use one matcher-less
+  // entry per event so the hook fires unconditionally.
+  // Match on the hook path, not the exact command string, so re-running after
+  // an older (unquoted) install — or alongside the plugin form — doesn't append
+  // a duplicate entry that would make every event fire twice.
+  let entry = hooks[event].find((e) =>
+    Array.isArray(e?.hooks) &&
+    e.hooks.some((h) => typeof h?.command === "string" && h.command.includes(HOOK_PATH))
+  );
+  if (entry) return false;
+  hooks[event].push({
+    hooks: [{ type: "command", command: HOOK_COMMAND }],
+  });
+  return true;
+}
+
+function main() {
+  const args = process.argv.slice(2);
+  if (args.includes("--help") || args.includes("-h")) {
+    console.log(
+      `vibehub-claude-code install — wire VibeHub session capture into Claude Code.\n\n` +
+        `Reads/writes ${SETTINGS_PATH}. A .vibehub.bak copy is saved before the first edit.\n\n` +
+        `Then set environment variables in the same settings.json env block:\n` +
+        `  VIBEHUB_API_URL  (default https://www.vibehub.co)\n` +
+        `  VIBEHUB_TOKEN    (from Settings → API tokens in the dashboard)\n`
+    );
+    process.exit(0);
+  }
+
+  const settings = loadSettings();
+  backup();
+
+  if (!settings.hooks || typeof settings.hooks !== "object") settings.hooks = {};
+  let added = 0;
+  for (const event of EVENTS) {
+    if (ensureHookEntry(settings.hooks, event)) added++;
+  }
+
+  mkdirSync(dirname(SETTINGS_PATH), { recursive: true });
+  writeFileSync(SETTINGS_PATH, JSON.stringify(settings, null, 2) + "\n");
+
+  console.log(`✓ wrote ${SETTINGS_PATH}`);
+  console.log(`✓ added ${added} new hook entr${added === 1 ? "y" : "ies"} (existing left untouched)`);
+  if (!process.env.VIBEHUB_TOKEN) {
+    console.log(
+      "\nNext step: set VIBEHUB_TOKEN. Generate one in the VibeHub dashboard → Settings → API tokens,\n" +
+        "then either export it in your shell or add it to settings.json:\n" +
+        '  "env": { "VIBEHUB_TOKEN": "vbh_…", "VIBEHUB_API_URL": "https://www.vibehub.co" }'
+    );
+  }
+}
+
+main();
