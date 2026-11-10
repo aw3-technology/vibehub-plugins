@@ -9,6 +9,14 @@ This repo is the plugin marketplace and editor integrations for
 VibeHub commit keeps the prompts, agent transcript, and model config next to
 the diff, so reviewers can see why a change exists, not just what changed.
 
+> Not to be confused with vibehub.io or `VW-ai/vibehub-plugin`, which are
+> unrelated projects with the same name.
+
+Just want to read a session? The free
+[Claude Code transcript viewer](https://www.vibehub.co/tools/claude-code-transcript-viewer)
+opens any `~/.claude/projects/*.jsonl` file in your browser and exports it
+to Markdown or HTML. It needs no install or account.
+
 ## Claude Code
 
 ```bash
@@ -53,6 +61,7 @@ Until it is, Claude Code is the supported path.
 - Docs: https://www.vibehub.co/docs
 - Claude Code integration guide: https://www.vibehub.co/integrations/claude-code
 - How VibeHub compares with similar tools: https://www.vibehub.co/compare
+- Claude Code transcript viewer: https://www.vibehub.co/tools/claude-code-transcript-viewer
 
 ## License
 
