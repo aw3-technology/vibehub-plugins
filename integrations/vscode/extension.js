@@ -159,11 +159,19 @@ async function captureCommit(dir, { notify } = {}) {
   } catch (e) {
     diff = `… (diff omitted: ${e.message})`;
   }
-  const shortstat = await git(repoRoot, ["show", "--format=", "--shortstat", "-m", "--first-parent", sha]);
-  const stat = (re) => {
-    const m = shortstat.match(re);
-    return m ? parseInt(m[1], 10) : 0;
-  };
+  // --numstat, not --shortstat: shortstat's wording is translated into the
+  // user's git locale ("Dateien geändert"), so regexes on it read 0.
+  const numstat = await git(repoRoot, ["show", "--format=", "--numstat", "-m", "--first-parent", sha]);
+  let filesChanged = 0;
+  let insertions = 0;
+  let deletions = 0;
+  for (const line of numstat.split(/\r?\n/)) {
+    const m = line.match(/^(\d+|-)\t(\d+|-)\t/);
+    if (!m) continue;
+    filesChanged++;
+    if (m[1] !== "-") insertions += Number(m[1]);
+    if (m[2] !== "-") deletions += Number(m[2]);
+  }
 
   const projectId = await resolveProjectId(repoRoot);
   const r = await api("POST", "/api/cli/commits", {
@@ -174,9 +182,9 @@ async function captureCommit(dir, { notify } = {}) {
     branch,
     parentSha,
     diff,
-    filesChanged: stat(/(\d+) files? changed/),
-    insertions: stat(/(\d+) insertions?/),
-    deletions: stat(/(\d+) deletions?/),
+    filesChanged,
+    insertions,
+    deletions,
   });
   await extContext.workspaceState.update(lastKey, sha);
   if (notify) {

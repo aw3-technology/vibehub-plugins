@@ -15,7 +15,7 @@
 // All requests go through the @vibehub/sdk so transport/auth/retries are shared
 // with every other integration.
 
-import { readFileSync, mkdirSync, writeFileSync, renameSync, existsSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync, renameSync, existsSync, unlinkSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, dirname } from "node:path";
 
@@ -46,8 +46,25 @@ function saveState(state) {
   // session id on the next call — no duplicates, no corruption.
   mkdirSync(STATE_DIR, { recursive: true });
   const tmp = `${STATE_PATH}.${process.pid}.tmp`;
-  writeFileSync(tmp, JSON.stringify(state, null, 2) + "\n", { mode: 0o600 });
-  renameSync(tmp, STATE_PATH);
+  const body = JSON.stringify(state, null, 2) + "\n";
+  writeFileSync(tmp, body, { mode: 0o600 });
+  // Windows refuses to rename over a file another hook process has open:
+  // retry briefly, then fall back to a direct write.
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      renameSync(tmp, STATE_PATH);
+      return;
+    } catch (e) {
+      if (!["EPERM", "EBUSY", "EACCES"].includes(e?.code)) throw e;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25 * (attempt + 1));
+    }
+  }
+  writeFileSync(STATE_PATH, body, { mode: 0o600 });
+  try {
+    unlinkSync(tmp);
+  } catch {
+    /* already gone */
+  }
 }
 
 function log(msg) {

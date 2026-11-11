@@ -1,6 +1,6 @@
 {
   "name": "vibehub",
-  "owner": { "name": "VibeHub", "url": "https://vibehub.co" },
+  "owner": { "name": "VibeHub", "url": "https://www.vibehub.co" },
   "metadata": {
     "description": "VibeHub integrations for Claude Code",
     "version": "1.0.0"
@@ -10,7 +10,7 @@
       "name": "vibehub",
       "source": "./integrations/claude-code",
       "description": "Automatically capture Claude Code transcripts and agent output into VibeHub, and attach them to git commits.",
-      "author": { "name": "VibeHub", "url": "https://vibehub.co" },
+      "author": { "name": "VibeHub", "url": "https://www.vibehub.co" },
       "homepage": "https://github.com/aw3-technology/vibehub-plugins/tree/main/integrations/claude-code",
       "license": "MIT",
       "keywords": ["vibehub", "transcripts", "sessions", "git"],
