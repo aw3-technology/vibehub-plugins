@@ -9,8 +9,20 @@ for attaching conversations to git commits.
 ```bash
 claude plugin marketplace add aw3-technology/vibehub-plugins
 claude plugin install vibehub@vibehub
-export VIBEHUB_TOKEN=vbh_…   # Settings → API tokens in the dashboard
 ```
+
+Then add your token (dashboard → Settings → API tokens) to the `env` block of
+`~/.claude/settings.json` (`%USERPROFILE%\.claude\settings.json` on Windows):
+
+```json
+{
+  "env": { "VIBEHUB_TOKEN": "vbh_…" }
+}
+```
+
+This works on macOS, Linux and Windows, and in sessions started from an app
+rather than a terminal. Exporting `VIBEHUB_TOKEN` in your shell profile also
+works for terminal-launched sessions.
 
 Open a new Claude Code session and it'll appear under **Runs** in the
 dashboard. No further setup.
