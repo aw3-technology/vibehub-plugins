@@ -5,7 +5,7 @@ prompts, tool calls, and agent output, and attach each conversation to the git
 commit it produced.
 
 This repo is the plugin marketplace and editor integrations for
-[VibeHub](https://www.vibehub.co), version control for AI-written code. Each
+[VibeHub](https://www.vibehub.co/?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins), version control for AI-written code. Each
 VibeHub commit keeps the prompts, agent transcript, and model config next to
 the diff, so reviewers can see why a change exists, not just what changed.
 
@@ -13,9 +13,11 @@ the diff, so reviewers can see why a change exists, not just what changed.
 > unrelated projects with the same name.
 
 Just want to read a session? The free
-[Claude Code transcript viewer](https://www.vibehub.co/tools/claude-code-transcript-viewer)
+[Claude Code transcript viewer](https://www.vibehub.co/tools/claude-code-transcript-viewer?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
 opens any `~/.claude/projects/*.jsonl` file in your browser and exports it
 to Markdown or HTML. It needs no install or account.
+
+[![The Claude Code transcript viewer showing a session's prompts and tool calls](https://www.vibehub.co/demo/hero-demo.jpg)](https://www.vibehub.co/tools/claude-code-transcript-viewer?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
 
 ## Claude Code
 
@@ -58,10 +60,10 @@ Until it is, Claude Code is the supported path.
 
 ## Links
 
-- Docs: https://www.vibehub.co/docs
-- Claude Code integration guide: https://www.vibehub.co/integrations/claude-code
-- How VibeHub compares with similar tools: https://www.vibehub.co/compare
-- Claude Code transcript viewer: https://www.vibehub.co/tools/claude-code-transcript-viewer
+- [Docs](https://www.vibehub.co/docs?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
+- [Claude Code integration guide](https://www.vibehub.co/integrations/claude-code?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
+- [How VibeHub compares with similar tools](https://www.vibehub.co/compare?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
+- [Claude Code transcript viewer](https://www.vibehub.co/tools/claude-code-transcript-viewer?utm_source=github&utm_medium=readme&utm_campaign=vibehub-plugins)
 
 ## License
 
