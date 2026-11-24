@@ -12,7 +12,7 @@
 // via `npx vibehub-claude-code install`, or by adding the entries in
 // `settings.template.json` to `~/.claude/settings.json` manually.
 //
-// All requests go through the @vibehub/sdk so transport/auth/retries are shared
+// All requests go through the vibehub-sdk so transport/auth/retries are shared
 // with every other integration.
 
 import { readFileSync, mkdirSync, writeFileSync, renameSync, existsSync, unlinkSync } from "node:fs";

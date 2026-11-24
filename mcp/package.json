@@ -1,0 +1,41 @@
+{
+  "name": "vibehub-mcp",
+  "version": "0.3.1",
+  "description": "MCP server that lets agentic IDEs capture LLM conversations into VibeHub and attach them to git commits.",
+  "type": "module",
+  "bin": {
+    "vibehub-mcp": "src/server.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "vibehub-sdk": "^0.3.1"
+  },
+  "keywords": [
+    "mcp",
+    "vibehub",
+    "llm",
+    "agent",
+    "cursor",
+    "windsurf",
+    "claude"
+  ],
+  "author": "VibeHub",
+  "license": "MIT",
+  "homepage": "https://www.vibehub.co/developers#mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aw3-technology/vibehub-plugins.git",
+    "directory": "mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/aw3-technology/vibehub-plugins/issues"
+  },
+  "mcpName": "io.github.aw3-technology/vibehub"
+}

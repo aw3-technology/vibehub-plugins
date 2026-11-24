@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.aw3-technology/vibehub",
+  "title": "VibeHub",
+  "description": "Save AI coding sessions to VibeHub and attach the conversation to the git commit it produced.",
+  "websiteUrl": "https://www.vibehub.co/developers#mcp",
+  "version": "0.3.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "vibehub-mcp",
+      "version": "0.3.1",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "VIBEHUB_TOKEN", "description": "API token from Settings → API tokens at www.vibehub.co", "isRequired": true, "isSecret": true },
+        { "name": "VIBEHUB_API_URL", "description": "API base URL (default https://www.vibehub.co)", "isRequired": false }
+      ]
+    }
+  ]
+}

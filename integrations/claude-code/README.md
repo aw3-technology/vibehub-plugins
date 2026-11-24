@@ -4,7 +4,15 @@ Claude Code plugin that captures every session — prompts, tool calls, agent
 output — into VibeHub, plus a `/vibehub:capture` skill for manual capture and
 for attaching conversations to git commits.
 
-## Install (plugin — recommended)
+## Install in one command (with the vb CLI)
+
+Install `vb` (`curl -fsSL https://www.vibehub.co/install.sh | sh` on macOS or
+Linux, `irm https://www.vibehub.co/install.ps1 | iex` in Windows PowerShell),
+then run `vb init`. It asks for a token, writes it to the `env` block below,
+installs this plugin and, inside a git repo, the commit capture hook. Safe to
+re-run.
+
+## Install (plugin by hand)
 
 ```bash
 claude plugin marketplace add aw3-technology/vibehub-plugins
@@ -12,7 +20,9 @@ claude plugin install vibehub@vibehub
 ```
 
 Then add your token (dashboard → Settings → API tokens) to the `env` block of
-`~/.claude/settings.json` (`%USERPROFILE%\.claude\settings.json` on Windows):
+`~/.claude/settings.json` (`%USERPROFILE%\.claude\settings.json` on Windows).
+A **Capture only** token is all the plugin and the `/vibehub:capture` skill
+need; if it leaks, it can only send captures and list or create projects:
 
 ```json
 {

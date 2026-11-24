@@ -76,9 +76,8 @@ async function captureCurrentChat() {
   }
 
   // VS Code's chat panel doesn't expose history programmatically yet, so we
-  // ask the user to paste it. The bookmarklet pattern keeps parity with
-  // v0/Lovable/Bolt. When the chat API surfaces real history we'll swap
-  // this for a direct read.
+  // ask the user to paste it. When the chat API surfaces real history we'll
+  // swap this for a direct read.
   const pasted = await vscode.window.showInputBox({
     prompt: "Paste the Copilot Chat transcript (or leave blank to use clipboard)",
     ignoreFocusOut: true,

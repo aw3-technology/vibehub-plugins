@@ -1,0 +1,45 @@
+{
+  "name": "vibehub-sdk",
+  "version": "0.3.1",
+  "description": "VibeHub SDK — capture LLM conversations from agentic IDEs and attach them to git commits.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "vibehub",
+    "llm",
+    "agent",
+    "sdk",
+    "conversation",
+    "git",
+    "ide"
+  ],
+  "author": "VibeHub",
+  "license": "MIT",
+  "homepage": "https://www.vibehub.co/developers#sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aw3-technology/vibehub-plugins.git",
+    "directory": "sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/aw3-technology/vibehub-plugins/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
