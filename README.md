@@ -48,8 +48,14 @@ Details: [integrations/claude-code](integrations/claude-code).
 | Replit | Setup script | [integrations/replit](integrations/replit) |
 | v0, Lovable, Bolt | Planned | [v0](integrations/v0) · [Lovable](integrations/lovable) · [Bolt](integrations/bolt) |
 
-The MCP-based setups run the `vibehub-mcp` server, which isn't on npm yet.
-Until it is, Claude Code is the supported path.
+The MCP-based setups run [`vibehub-mcp`](https://www.npmjs.com/package/vibehub-mcp)
+with `npx -y vibehub-mcp` (Node.js 18+). It is also in the official MCP
+registry as `io.github.aw3-technology/vibehub`. Cursor, Windsurf and Zed
+have one-command installers: `npx vibehub-cursor install --token vbh_…`,
+`npx vibehub-windsurf install --token vbh_…` and `npx vibehub-zed --token vbh_…`.
+
+For your own agent, the TypeScript SDK is
+[`vibehub-sdk`](https://www.npmjs.com/package/vibehub-sdk).
 
 ## Configuration
 
