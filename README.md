@@ -57,6 +57,17 @@ have one-command installers: `npx vibehub-cursor install --token vbh_…`,
 For your own agent, the TypeScript SDK is
 [`vibehub-sdk`](https://www.npmjs.com/package/vibehub-sdk).
 
+## Source
+
+| Folder | npm package | What it is |
+| --- | --- | --- |
+| [mcp](mcp) | [`vibehub-mcp`](https://www.npmjs.com/package/vibehub-mcp) | MCP server (stdio), 20 tools. Also runs from the [Dockerfile](Dockerfile). |
+| [sdk](sdk) | [`vibehub-sdk`](https://www.npmjs.com/package/vibehub-sdk) | TypeScript client for live session capture |
+| [integrations](integrations) | `vibehub-claude-code`, `vibehub-cursor`, `vibehub-windsurf`, `vibehub-zed` | Claude Code plugin and editor installers |
+
+This repo mirrors the published releases from the VibeHub app repo, so
+open issues here rather than pull requests against the code.
+
 ## Configuration
 
 | Variable | Default | Purpose |
